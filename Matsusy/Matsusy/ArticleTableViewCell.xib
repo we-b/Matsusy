@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ArticleTableViewCell" customModule="Matsusy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-oi-IVF">
+                        <rect key="frame" x="15" y="10" width="295" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="DWX-8C-21l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T00-3u-h40">
+                        <rect key="frame" x="15" y="25" width="295" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="4uu-vs-q0g"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-Qa-0fU">
+                        <rect key="frame" x="15" y="65" width="295" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Dyv-YU-jB4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="7"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Pze-Qa-0fU" firstAttribute="top" secondItem="T00-3u-h40" secondAttribute="bottom" constant="5" id="3NM-PV-0qa"/>
+                    <constraint firstItem="pP8-oi-IVF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="IWo-Pz-alc"/>
+                    <constraint firstItem="pP8-oi-IVF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="W02-xB-krf"/>
+                    <constraint firstAttribute="trailing" secondItem="pP8-oi-IVF" secondAttribute="trailing" constant="10" id="icG-08-8J4"/>
+                    <constraint firstItem="T00-3u-h40" firstAttribute="top" secondItem="pP8-oi-IVF" secondAttribute="bottom" id="kCQ-rZ-2tc"/>
+                    <constraint firstItem="T00-3u-h40" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ktK-6H-7SV"/>
+                    <constraint firstAttribute="trailing" secondItem="T00-3u-h40" secondAttribute="trailing" constant="10" id="wjv-nn-Cpi"/>
+                    <constraint firstAttribute="trailing" secondItem="Pze-Qa-0fU" secondAttribute="trailing" constant="10" id="xJF-i9-Obx"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+</document>
