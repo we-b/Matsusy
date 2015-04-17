@@ -61,6 +61,26 @@
             </objects>
             <point key="canvasLocation" x="508.5" y="331.5"/>
         </scene>
+        <!--Item 2-->
+        <scene sceneID="3V4-lr-ilx">
+            <objects>
+                <viewController id="HTl-XT-c2C" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fUf-Vr-wxz"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q5a-XV-0fa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WQO-nB-qgM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="5j1-yC-6MV"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8R-CS-9On" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="780" y="1384"/>
+        </scene>
         <!--Article Web View Controller-->
         <scene sceneID="1MS-kv-Uk5">
             <objects>
