@@ -8,11 +8,18 @@
 
 import UIKit
 
-class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate, NSXMLParserDelegate{
+//セルがタップされたことをArticleViewControllerに知らせてあげる
+@objc protocol ArticleTableViewDelegate{
+    func didSelectTableViewCell(url: String)
+}
 
+class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate, NSXMLParserDelegate {
+
+    var cutomDelegate: ArticleTableViewDelegate?
+    
+    let articleViewController = ArticleViewController()
     var articles:Array<Article> = []
     var elementName = ""
-    
 
     //siwftのバグ
     override init(frame: CGRect, style: UITableViewStyle) {
@@ -66,7 +73,7 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
             } else if self.elementName == "pubDate" {
                 lastArticle?.date += string
             } else if self.elementName == "link" {
-                lastArticle?.link += string
+                lastArticle?.link += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             }
         }
     }
@@ -101,8 +108,7 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var articleURL = articles[indexPath.row].link
-        ArticleViewController().segeToWeb(articleURL)
-    }
-    
+        self.cutomDelegate?.didSelectTableViewCell(articleURL)
+    }    
 
 }

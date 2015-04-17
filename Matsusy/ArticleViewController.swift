@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ArticleViewController: UIViewController, UIScrollViewDelegate {
+class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTableViewDelegate {
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var articleScrollView: UIScrollView!
     @IBOutlet weak var headerUnderber: UIView!
@@ -46,8 +47,13 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
         setTabLabel(130, text: "WSJ")
         setTabLabel(250, text: "100shiki")
         
+        
     }
 
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -56,6 +62,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
     func setArticleTableView(x: CGFloat, siteXML: String, tag: Int){
         var frame = CGRectMake(x, 200, self.view.frame.width, articleScrollView.frame.height - 200)
         var articleTableView = ArticleTableView(frame: frame)
+        articleTableView.cutomDelegate = self
         articleScrollView.tag = tag
         articleTableView.loadRSS(siteXML, articleArray: articles)
         articleScrollView.addSubview(articleTableView)
@@ -93,22 +100,18 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
             headerUnderber.backgroundColor = UIColor.greenColor()
         }
     }
-    
-
-    func segeToWeb(articleURL: AnyObject){
-        println("幸せ！")
-        println(articleURL)
-        self.performSegueWithIdentifier("articleSegue", sender: articleURL)
-    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("aaaaaaaaaaaaaaaaaaa")
-        if segue.identifier == "articleSegue" {
-            println("oooooooooooooooo")
+        if segue.identifier == "articleSegeu" {
             var articleURL = sender as String
             var articleWebViewController: ArticleWebViewController = segue.destinationViewController as ArticleWebViewController
             articleWebViewController.url = articleURL
         }
+    }
+    
+    
+    func didSelectTableViewCell(url: String) {
+         self.performSegueWithIdentifier("articleSegeu", sender: url)
     }
     
 

@@ -54,7 +54,7 @@
                         <outlet property="articleScrollView" destination="s0v-Ci-G0B" id="uJ6-k9-EmP"/>
                         <outlet property="headerUnderber" destination="QfM-2q-1wm" id="mBC-jR-7Ox"/>
                         <outlet property="headerView" destination="y0R-ji-aaF" id="Ad1-O6-g0v"/>
-                        <segue destination="elM-Sy-fvp" kind="show" identifier="kieta" id="VPE-Nf-YIv"/>
+                        <segue destination="elM-Sy-fvp" kind="show" identifier="articleSegeu" id="VPE-Nf-YIv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyU-5D-pwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
