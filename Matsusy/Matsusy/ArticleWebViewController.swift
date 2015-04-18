@@ -12,36 +12,47 @@ import Social
 
 class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     
-    var url:String?
+    var article: Article!
     var wkWebView:WKWebView!
     let backgroundView = UIView()
     var shareView = UIView()
+    var myArticle = MyArticle.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
         self.wkWebView = WKWebView(frame: self.view.frame)
-        var URL = NSURL(string: url!)
+        var URL = NSURL(string: article.link)
         var URLReq = NSURLRequest(URL: URL!)
         self.wkWebView.loadRequest(URLReq)
         self.view.addSubview(wkWebView)
         
         self.wkWebView?.navigationDelegate = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "menu", style: UIBarButtonItemStyle.Plain, target: self, action: "menu")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "menu")
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HirakakuProN-W3", size: 15)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
     func menu(){
         setbackgroundView()
         setShareView()
-        setShareBtn(40, y: 40, tag: 1)
-        setShareBtn(160, y: 40, tag: 2)
-        setShareBtn(40, y: 160, tag: 3)
-        setShareBtn(160, y: 160, tag: 4)
+        setShareBtn(27, y: 20, tag: 1, imageName: "facebook_icon")
+        setShareBtn(114, y: 20, tag: 2, imageName: "twitter_icon")
+        setShareBtn(201, y: 20, tag: 3, imageName: "safari_icon")
+        setShareBtn(287, y: 20, tag: 4, imageName: "book1")
+        
+        //アニメーション
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, options: nil,
+            animations: { () -> Void in
+                self.shareView.frame.origin = CGPointMake(0, self.view.frame.height - 100)
+            }, completion: nil)
     }
     
     func setbackgroundView() {
-        backgroundView.frame = self.view.frame
+        println(self.view.frame)
+        backgroundView.frame.size = self.view.frame.size
+        backgroundView.frame.origin = CGPointMake(0, 0)
         backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         self.view.addSubview(backgroundView)
         
@@ -55,17 +66,16 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     
     func setShareView(){
         //サイズを決めた後に位置を設定してあげ.サイズを設定していないとviewは点になる
-        shareView.frame.size = CGSizeMake(300, 300)
-        shareView.center = backgroundView.center
+        shareView.frame = CGRectMake(0, self.view.frame.height, self.view.frame.width, 100)
         shareView.backgroundColor = UIColor.whiteColor()
         shareView.layer.cornerRadius = 3
         backgroundView.addSubview(shareView)
     }
     
-    func setShareBtn(x: CGFloat, y: CGFloat, tag: Int){
-        var shareBtn = UIButton(frame: CGRectMake(x, y, 100, 100))
-        shareBtn.setTitle("T", forState: UIControlState.Normal)
-        shareBtn.backgroundColor = UIColor.blueColor()
+    func setShareBtn(x: CGFloat, y: CGFloat, tag: Int, imageName: String){
+        var shareBtn = UIButton(frame: CGRectMake(x, y, 60, 60))
+//        shareBtn.setTitle("T", forState: UIControlState.Normal)
+        shareBtn.setBackgroundImage(UIImage(named: imageName), forState: UIControlState.Normal)
         shareBtn.layer.cornerRadius = 3
         shareBtn.tag = tag
         shareBtn.addTarget(self, action: "tapSharebtn:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -86,8 +96,23 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
             println(wkWebView.URL!)
             UIApplication.sharedApplication().openURL(wkWebView.URL!)
         } else if sender.tag == 4 {
-            println("マイリストに保存！")
+            if self.alreadyArticle() {
+                self.alert("登録済みです。")
+            } else {
+                myArticle.save(article)
+                self.alert("マイページに保存しました。")
+            }
         }
+    }
+
+    
+    func alreadyArticle() -> Bool {
+        for article in myArticle.myArticles {
+            if article.link == self.article.link {
+                return true
+            }
+        }
+        return false
     }
     
     
@@ -106,6 +131,16 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         self.title = self.wkWebView.title
+    }
+    
+    func alert(text: String){
+        let alertController = UIAlertController(title: text, message:nil , preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(action)
+        var hogan = NSMutableAttributedString(string: text)
+        hogan.addAttribute(NSFontAttributeName, value: UIFont(name: "HirakakuProN-W3", size: 17)!, range: NSRange(location: 0, length: hogan.length))
+        alertController.setValue(hogan, forKey: "attributedTitle")
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     /*

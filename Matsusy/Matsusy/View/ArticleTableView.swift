@@ -10,7 +10,7 @@ import UIKit
 
 //セルがタップされたことをArticleViewControllerに知らせてあげる
 @objc protocol ArticleTableViewDelegate{
-    func didSelectTableViewCell(url: String)
+    func didSelectTableViewCell(atticle: Article)
 }
 
 class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate, NSXMLParserDelegate {
@@ -67,11 +67,11 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         if articles.count > 0 {
             var lastArticle = self.articles.last
             if self.elementName == "title" {
-                lastArticle?.title += string
+                lastArticle?.title += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             } else if self.elementName == "description" {
                 lastArticle?.descript += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             } else if self.elementName == "pubDate" {
-                lastArticle?.date += string
+                lastArticle?.date += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             } else if self.elementName == "link" {
                 lastArticle?.link += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             }
@@ -102,13 +102,25 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         var descriptLable = cell.viewWithTag(2) as UILabel
         descriptLable.text = article.descript
         var dateLabel = cell.viewWithTag(3) as UILabel
-        dateLabel.text = article.date
+        dateLabel.text = conversionDateFormt(article.date)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var articleURL = articles[indexPath.row].link
-        self.cutomDelegate?.didSelectTableViewCell(articleURL)
-    }    
+        var article = articles[indexPath.row]
+        self.cutomDelegate?.didSelectTableViewCell(article)
+    }
+    
+    //取得した日付のフォーマットを変換
+    func conversionDateFormt(dateString:String) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
+        let date: NSDate? = formatter.dateFromString(dateString)
+        
+        let newFromatter = NSDateFormatter()
+        formatter.dateFormat = "yyy/MM/dd HH:mm"
+        var newDateString = formatter.stringFromDate(date!)
+        return newDateString
+    }
 
 }

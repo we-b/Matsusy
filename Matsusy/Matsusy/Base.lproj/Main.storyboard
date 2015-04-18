@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Kn-GB-sEo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="U51-lh-Mpe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -8,10 +8,17 @@
         <scene sceneID="BZ4-M9-0Ef">
             <objects>
                 <navigationController id="0Kn-GB-sEo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="cc4-Fs-h9l"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="abf-wm-YD8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="abf-wm-YD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.1960784314" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.1960784314" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="lTL-jh-0Tc" kind="relationship" relationship="rootViewController" id="jcZ-iv-BV3"/>
@@ -20,6 +27,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="agn-tD-sbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="54" y="332"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Qez-n3-MdD">
+            <objects>
+                <tabBarController id="U51-lh-Mpe" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Vk1-Kp-Q93">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.97254901959999995" green="0.96078431369999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="0Kn-GB-sEo" kind="relationship" relationship="viewControllers" id="XTO-Pp-Kk6"/>
+                        <segue destination="6zK-8L-4D9" kind="relationship" relationship="viewControllers" id="K4O-Qs-2lM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cES-Xz-HAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-547" y="704"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="zbG-C5-Cep">
@@ -30,29 +57,25 @@
                         <viewControllerLayoutGuide type="bottom" id="Zs1-6x-vQI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Jua-Dp-Kt9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0R-ji-aaF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QfM-2q-1wm">
-                                <rect key="frame" x="0.0" y="64" width="375" height="3"/>
-                                <color key="backgroundColor" red="0.87284757653061229" green="0.87284757653061229" blue="0.87284757653061229" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                <color key="backgroundColor" red="0.1960784314" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s0v-Ci-G0B">
-                                <rect key="frame" x="0.0" y="67" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="612"/>
                                 <color key="backgroundColor" red="0.61898230233228579" green="0.87284757653061229" blue="0.86655708164124023" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="6yd-WS-hk4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="articleScrollView" destination="s0v-Ci-G0B" id="uJ6-k9-EmP"/>
-                        <outlet property="headerUnderber" destination="QfM-2q-1wm" id="mBC-jR-7Ox"/>
                         <outlet property="headerView" destination="y0R-ji-aaF" id="Ad1-O6-g0v"/>
                         <segue destination="elM-Sy-fvp" kind="show" identifier="articleSegeu" id="VPE-Nf-YIv"/>
                     </connections>
@@ -61,25 +84,62 @@
             </objects>
             <point key="canvasLocation" x="508.5" y="331.5"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="3V4-lr-ilx">
+        <!--My Page-->
+        <scene sceneID="tMi-5y-Txz">
             <objects>
-                <viewController id="HTl-XT-c2C" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fUf-Vr-wxz"/>
-                        <viewControllerLayoutGuide type="bottom" id="Q5a-XV-0fa"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WQO-nB-qgM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController id="gbg-OX-OHG" customClass="myPageTableViewController" customModule="Matsusy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UCv-PM-kNd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="5j1-yC-6MV"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w8R-CS-9On" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Fy7-dH-8C7">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fy7-dH-8C7" id="aJH-nb-wsm">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gbg-OX-OHG" id="Us9-HD-OqO"/>
+                            <outlet property="delegate" destination="gbg-OX-OHG" id="Hbb-Df-qbN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Page" id="Bur-LY-HEQ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="elM-Sy-fvp" kind="show" identifier="articleSegeu" id="tpP-aU-bOU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNX-zY-pCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="1384"/>
+            <point key="canvasLocation" x="508.5" y="1057.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="18H-SJ-dan">
+            <objects>
+                <navigationController id="6zK-8L-4D9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" selectedImage="myPage.png" systemItem="bookmarks" id="7FL-q3-BmP">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="2"/>
+                    </tabBarItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xtc-u2-Bfb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.1960784314" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.1960784314" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gbg-OX-OHG" kind="relationship" relationship="rootViewController" id="Xgf-8D-fdc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAI-jR-Wi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53.5" y="1057.5"/>
         </scene>
         <!--Article Web View Controller-->
         <scene sceneID="1MS-kv-Uk5">
@@ -90,15 +150,22 @@
                         <viewControllerLayoutGuide type="bottom" id="HBv-ek-jJ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hMJ-wX-eeH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3m-p6-E74" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.5" y="331.5"/>
+            <point key="canvasLocation" x="1051.5" y="737.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="myPage.png" width="16" height="16"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="tpP-aU-bOU"/>
+    </inferredMetricsTieBreakers>
 </document>
