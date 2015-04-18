@@ -30,6 +30,8 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         super.init(frame: frame)
         self.delegate = self
         self.dataSource = self
+        
+        //セルの登録
         self.registerNib(UINib(nibName: "ArticleTableViewCell", bundle: nil), forCellReuseIdentifier: "ArticleTableViewCell")
     }
     
@@ -63,6 +65,7 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         }
     }
     
+    //指定したタグの中身を取得
     func parser(parser: NSXMLParser!, foundCharacters string: String!) {
         if articles.count > 0 {
             var lastArticle = self.articles.last
@@ -78,14 +81,14 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         }
     }
     
-    
+    //XMLパース終了
     func parserDidEndDocument(parser: NSXMLParser!) {
         dispatch_async(dispatch_get_main_queue(), {
             self.reloadData()
         })
     }
     
-//     tabel view data sourse
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
@@ -108,6 +111,8 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var article = articles[indexPath.row]
+        
+        //ArticleViewControllerにセルがタップされたことを通知
         self.cutomDelegate?.didSelectTableViewCell(article)
     }
     

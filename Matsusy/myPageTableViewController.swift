@@ -14,32 +14,34 @@ class myPageTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //セルの登録
         self.tableView.registerNib(UINib(nibName: "myTopTableViewCell", bundle: nil), forCellReuseIdentifier: "myTopTableViewCell")
-        
         self.tableView.registerNib(UINib(nibName: "ArticleTableViewCell", bundle: nil), forCellReuseIdentifier: "ArticleTableViewCell")
+        
+        //編集ボタン追加
         self.navigationItem.leftBarButtonItem = editButtonItem()
         
+        //NSUSerDefaultsから値を取り出す
         myArticle.getMyArticle()
         
+//        tableView.contentInset.bottom = 49    
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
+        //最初のセルはアイコン用
         return myArticle.myArticles.count + 1
     }
 
@@ -50,26 +52,25 @@ class myPageTableViewController: UITableViewController {
             return cell
         } else {
             var cell: ArticleTableViewCell = tableView.dequeueReusableCellWithIdentifier("ArticleTableViewCell", forIndexPath: indexPath) as ArticleTableViewCell
-            
             var article = myArticle.myArticles[indexPath.row - 1]
 
             var titleLabel = cell.viewWithTag(1) as UILabel
-            titleLabel.text = article.title
-            
             var descriptLabel = cell.viewWithTag(2) as UILabel
-            descriptLabel.text = article.descript
-            
             var dateLabel = cell.viewWithTag(3) as UILabel
-            println(article.date)
+            
+            titleLabel.text = article.title
+            descriptLabel.text = article.descript
             dateLabel.text = conversionDateFormt(article.date)
             
-            var separator:UIView = UILabel()
-            tableView.tableFooterView = separator
+            //セルの境界線を消す
+            tableView.tableFooterView = UILabel()
             
             return cell
         }
     }
     
+    
+    //セルの高さ
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var cellHeight:CGFloat
         if indexPath.row == 0 {
@@ -80,6 +81,8 @@ class myPageTableViewController: UITableViewController {
         return cellHeight
     }
 
+    
+    //セルが編集可能か設定
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if indexPath.row == 0 {
             return false
@@ -88,19 +91,22 @@ class myPageTableViewController: UITableViewController {
         }
     }
     
+    
+    //セルを削除
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
-            println("-------------------------------------")
-            println(self.myArticle.myArticles)
-            println(indexPath.row-1)
+            //myArticles配列の更新(削除した要素を除き、NSUserDefaltsで再保存)
             myArticle.updateMyArticle(indexPath.row-1)
+            //実際にテーブルビューからセルを削除
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         default:
             return
         }
     }
     
+
+    //セルを選択した時
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row != 0 {
             var article = myArticle.myArticles[indexPath.row - 1]
@@ -108,8 +114,8 @@ class myPageTableViewController: UITableViewController {
             self.performSegueWithIdentifier("articleSegeu", sender: article)
         }
     }
-//
 
+    //画面遷移時に値を受け渡す
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "articleSegeu" {
             var articleWebViewController = segue.destinationViewController as ArticleWebViewController
@@ -118,17 +124,20 @@ class myPageTableViewController: UITableViewController {
         }
     }
     
+    
     //取得した日付のフォーマットを変換
     func conversionDateFormt(dateString:String) -> String {
+        //取得したフォーマットでNSDateを取得
         let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
         let date: NSDate? = formatter.dateFromString(dateString)
-        
+        //NSDateから取得したいフォーマットで文字列で出力
         let newFromatter = NSDateFormatter()
         formatter.dateFormat = "yyy/MM/dd HH:mm"
         var newDateString = formatter.stringFromDate(date!)
         return newDateString
     }
+    
     
     /*
     // Override to support conditional editing of the table view.

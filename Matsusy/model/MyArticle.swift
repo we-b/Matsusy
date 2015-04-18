@@ -12,17 +12,19 @@ class MyArticle: NSObject {
 
     var myArticles: Array<Article> = []
     
-    
-    //保存
-    func save(articleModel: Article) {
-        self.myArticles.append(articleModel)
+    //bookmarkに追加
+    func addMyArticle(articleModel: Article) {
+        self.myArticles.insert(articleModel, atIndex: 0)
         save()
     }
     
+    
+    //編集
     func updateMyArticle(index: Int){
         self.myArticles.removeAtIndex(index)
         save()
     }
+    
     
     func save(){
         var articles: Array<Dictionary<String, AnyObject>> = []
@@ -36,7 +38,7 @@ class MyArticle: NSObject {
     }
     
     
-    //取り出す
+    //NSUserDefaultsから取り出す
     func getMyArticle() -> Array<Article> {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let articles = defaults.objectForKey("myArticles") as? Array<Dictionary<String, String>> {
@@ -48,6 +50,7 @@ class MyArticle: NSObject {
         return self.myArticles
     }
     
+    
     //dictionary => Article Model
     func convertArticleMolel(dic: Dictionary<String, String>) -> Article {
         var article = Article()
@@ -57,6 +60,7 @@ class MyArticle: NSObject {
         article.link = dic["link"]!
         return article
     }
+    
     
     //Article Model => dictionary
     func convertDictionary(article : Article) -> Dictionary<String, AnyObject>{

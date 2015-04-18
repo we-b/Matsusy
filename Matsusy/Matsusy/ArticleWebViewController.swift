@@ -21,7 +21,6 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         self.wkWebView = WKWebView(frame: self.view.frame)
         var URL = NSURL(string: article.link)
         var URLReq = NSURLRequest(URL: URL!)
@@ -29,10 +28,24 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
         self.view.addSubview(wkWebView)
         
         self.wkWebView?.navigationDelegate = self
+        
+        //ナビゲーションバーのタイトル、ボタン
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "menu")
         
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "HirakakuProN-W3", size: 15)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        //ナビゲーションバー表示
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     
     func menu(){
         setbackgroundView()
@@ -49,6 +62,7 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
             }, completion: nil)
     }
     
+    
     func setbackgroundView() {
         println(self.view.frame)
         backgroundView.frame.size = self.view.frame.size
@@ -60,9 +74,11 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
         backgroundView.addGestureRecognizer(gesture)
     }
     
+    
     func tapBackgroundView(){
         backgroundView.removeFromSuperview()
     }
+    
     
     func setShareView(){
         //サイズを決めた後に位置を設定してあげ.サイズを設定していないとviewは点になる
@@ -74,13 +90,13 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     
     func setShareBtn(x: CGFloat, y: CGFloat, tag: Int, imageName: String){
         var shareBtn = UIButton(frame: CGRectMake(x, y, 60, 60))
-//        shareBtn.setTitle("T", forState: UIControlState.Normal)
         shareBtn.setBackgroundImage(UIImage(named: imageName), forState: UIControlState.Normal)
         shareBtn.layer.cornerRadius = 3
         shareBtn.tag = tag
         shareBtn.addTarget(self, action: "tapSharebtn:", forControlEvents: UIControlEvents.TouchUpInside)
         shareView.addSubview(shareBtn)
     }
+    
     
     func tapSharebtn(sender: UIButton){
         if sender.tag == 1 {
@@ -92,20 +108,20 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
             facebookVC.setInitialText(wkWebView.URL?.absoluteString)
             presentViewController(facebookVC, animated: true, completion: nil)
         } else if sender.tag == 3 {
-            println("==================")
             println(wkWebView.URL!)
             UIApplication.sharedApplication().openURL(wkWebView.URL!)
         } else if sender.tag == 4 {
             if self.alreadyArticle() {
                 self.alert("登録済みです。")
             } else {
-                myArticle.save(article)
+                myArticle.addMyArticle(article)
                 self.alert("マイページに保存しました。")
             }
         }
     }
 
     
+    //bookmark使用とした記事がすでにマークいているか否かでBOOL
     func alreadyArticle() -> Bool {
         for article in myArticle.myArticles {
             if article.link == self.article.link {
@@ -116,29 +132,22 @@ class ArticleWebViewController: UIViewController, WKNavigationDelegate {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.title = "読み込み中..."
     }
     
+    
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         self.title = self.wkWebView.title
     }
+    
     
     func alert(text: String){
         let alertController = UIAlertController(title: text, message:nil , preferredStyle: UIAlertControllerStyle.Alert)
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alertController.addAction(action)
         var hogan = NSMutableAttributedString(string: text)
-        hogan.addAttribute(NSFontAttributeName, value: UIFont(name: "HirakakuProN-W3", size: 17)!, range: NSRange(location: 0, length: hogan.length))
+        hogan.addAttribute(NSFontAttributeName, value: UIFont(name: "HirakakuProN-W3", size: 15)!, range: NSRange(location: 0, length: hogan.length))
         alertController.setValue(hogan, forKey: "attributedTitle")
         self.presentViewController(alertController, animated: true, completion: nil)
     }

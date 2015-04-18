@@ -62,11 +62,11 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
         
         siteAicons[0].setTitleColor(bb, forState: UIControlState.Normal)
         siteAicons[0].layer.borderColor = bb.CGColor
-        
-        
+    
     }
 
     override func viewWillAppear(animated: Bool) {
+        //ナビゲーションバー表示
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -77,7 +77,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
 
     
     func setArticleTableView(x: CGFloat, siteXML: String, tag: Int){
-        var frame = CGRectMake(x, 200, self.view.frame.width, articleScrollView.frame.height - 200)
+        //フッターの分の49pxも引く
+        var frame = CGRectMake(x, 200, self.view.frame.width, articleScrollView.frame.height - 200 - 49)
         var articleTableView = ArticleTableView(frame: frame)
         articleTableView.cutomDelegate = self
         articleScrollView.tag = tag
@@ -101,21 +102,6 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
         tabButton.layer.masksToBounds = true
         self.headerView.addSubview(tabButton)
         siteAicons!.append(tabButton)
-        
-//        var tabLabel = UILabel()
-//        tabLabel.frame.size = CGSizeMake(36, 36)
-//        tabLabel.center = CGPointMake(x, 44)
-//        tabLabel.text = text
-//        tabLabel.textColor = UIColor.whiteColor()
-//        tabLabel.font = UIFont(name: "HirakakuProN-W6", size: 13)
-//        tabLabel.backgroundColor = black
-//        tabLabel.textAlignment = NSTextAlignment.Center
-//        tabLabel.layer.cornerRadius = 18
-//        tabLabel.layer.borderColor = UIColor.whiteColor().CGColor
-//        tabLabel.layer.borderWidth = 1
-//        tabLabel.layer.masksToBounds = true
-//        self.headerView.addSubview(tabLabel)
-//        siteAicons!.append(tabLabel)
     }
     
     func tapSiteIcon(sender: UIButton){
@@ -160,7 +146,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var scrollPoint = scrollView.contentOffset.x
         if scrollPoint == 0 {
-            siteAicons[0].setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            siteAicons[0].setTitleColor(bb, forState: .Normal)
             siteAicons[0].layer.borderColor = blue.CGColor
             siteAicons[1].setTitleColor(UIColor.whiteColor(), forState: .Normal)
             siteAicons[1].layer.borderColor = UIColor.whiteColor().CGColor
@@ -183,6 +169,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
         }
     }
 
+    //画面遷移時に値を受け渡す
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "articleSegeu" {
             var article = sender as Article
@@ -191,7 +178,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleTabl
         }
     }
     
-    
+    //自作デリゲートメソッド
     func didSelectTableViewCell(article: Article) {
          self.performSegueWithIdentifier("articleSegeu", sender: article)
     }
