@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="myTopTableViewCell" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="myTopTableViewCell" customModule="Matsusy" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyTopTableViewCell" id="KGk-i7-Jjw" customClass="MyTopTableViewCell" customModule="Matsusy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="359" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -27,7 +27,7 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="223.5" y="179"/>
+            <point key="canvasLocation" x="63.5" y="177"/>
         </tableViewCell>
     </objects>
     <resources>

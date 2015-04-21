@@ -22,16 +22,16 @@
                         <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T00-3u-h40">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T00-3u-h40">
                         <rect key="frame" x="15" y="25" width="295" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="4uu-vs-q0g"/>
+                            <constraint firstAttribute="height" constant="35" id="WM9-bb-tkX"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-Qa-0fU">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-Qa-0fU">
                         <rect key="frame" x="15" y="65" width="295" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Dyv-YU-jB4"/>
@@ -41,18 +41,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="Pze-Qa-0fU" firstAttribute="top" secondItem="T00-3u-h40" secondAttribute="bottom" constant="5" id="3NM-PV-0qa"/>
+                    <constraint firstItem="T00-3u-h40" firstAttribute="top" secondItem="pP8-oi-IVF" secondAttribute="bottom" constant="5" id="3LJ-3L-fw1"/>
                     <constraint firstItem="pP8-oi-IVF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="IWo-Pz-alc"/>
+                    <constraint firstItem="T00-3u-h40" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="IjT-el-Ikh"/>
                     <constraint firstItem="pP8-oi-IVF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="W02-xB-krf"/>
                     <constraint firstAttribute="trailing" secondItem="pP8-oi-IVF" secondAttribute="trailing" constant="10" id="icG-08-8J4"/>
-                    <constraint firstItem="T00-3u-h40" firstAttribute="top" secondItem="pP8-oi-IVF" secondAttribute="bottom" id="kCQ-rZ-2tc"/>
-                    <constraint firstItem="T00-3u-h40" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ktK-6H-7SV"/>
-                    <constraint firstAttribute="trailing" secondItem="T00-3u-h40" secondAttribute="trailing" constant="10" id="wjv-nn-Cpi"/>
+                    <constraint firstAttribute="trailing" secondItem="T00-3u-h40" secondAttribute="trailing" constant="10" id="pw1-zH-Jsj"/>
                     <constraint firstAttribute="trailing" secondItem="Pze-Qa-0fU" secondAttribute="trailing" constant="10" id="xJF-i9-Obx"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="date" destination="Pze-Qa-0fU" id="7Mm-zy-zQF"/>
+                <outlet property="descript" destination="T00-3u-h40" id="7Lx-Nh-kOZ"/>
+                <outlet property="title" destination="pP8-oi-IVF" id="a5x-qp-OlB"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

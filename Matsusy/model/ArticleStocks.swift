@@ -8,32 +8,32 @@
 
 import UIKit
 
-class MyArticle: NSObject {
+class ArticleStocks: NSObject {
 
     var myArticles: Array<Article> = []
     
     //bookmarkに追加
-    func addMyArticle(articleModel: Article) {
+    func addArticleStocks(articleModel: Article) {
         self.myArticles.insert(articleModel, atIndex: 0)
         save()
     }
     
     
     //編集
-    func updateMyArticle(index: Int){
+    func removeMyArticle(index: Int){
         self.myArticles.removeAtIndex(index)
         save()
     }
     
     
     func save(){
-        var articles: Array<Dictionary<String, AnyObject>> = []
+        var tmpArticles: Array<Dictionary<String, AnyObject>> = []
         for article in self.myArticles {
             var articleDic = convertDictionary(article)
-            articles.append(articleDic)
+            tmpArticles.append(articleDic)
         }
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(articles, forKey: "myArticles")
+        defaults.setObject(tmpArticles, forKey: "myArticles")
         defaults.synchronize()
     }
     
@@ -43,7 +43,7 @@ class MyArticle: NSObject {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let articles = defaults.objectForKey("myArticles") as? Array<Dictionary<String, String>> {
             for dic in articles {
-                var article = convertArticleMolel(dic)
+                var article = convertArticleModel(dic)
                 self.myArticles.append(article)
             }
         }
@@ -52,7 +52,7 @@ class MyArticle: NSObject {
     
     
     //dictionary => Article Model
-    func convertArticleMolel(dic: Dictionary<String, String>) -> Article {
+    func convertArticleModel(dic: Dictionary<String, String>) -> Article {
         var article = Article()
         article.title = dic["title"]!
         article.descript = dic["descript"]!
@@ -74,9 +74,9 @@ class MyArticle: NSObject {
 
     
     //シングルトン
-    class var sharedInstance: MyArticle {
+    class var sharedInstance: ArticleStocks {
         struct Static {
-            static let instance: MyArticle = MyArticle()
+            static let instance: ArticleStocks = ArticleStocks()
         }
         return Static.instance
     }

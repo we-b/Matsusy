@@ -9,7 +9,7 @@
 import UIKit
 
 //初めのセル(ユーザのアイコン、ヘッダー用)
-class myTopTableViewCell: UITableViewCell {
+class MyTopTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

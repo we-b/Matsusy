@@ -10,17 +10,21 @@ import UIKit
 
 //セルがタップされたことをArticleViewControllerに知らせてあげる
 @objc protocol ArticleTableViewDelegate{
-    func didSelectTableViewCell(atticle: Article)
+    func didSelectTableViewCell(article: Article)
 }
 
 class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate, NSXMLParserDelegate {
 
     var cutomDelegate: ArticleTableViewDelegate?
-    
-    let articleViewController = ArticleViewController()
     var articles:Array<Article> = []
     var elementName = ""
-
+    var siteImageName:String!
+    var siteName:String!
+    var siteColor:UIColor!
+    
+    let siteColors:Array<UIColor> = []
+    
+    
     //siwftのバグ
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
@@ -33,6 +37,8 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         
         //セルの登録
         self.registerNib(UINib(nibName: "ArticleTableViewCell", bundle: nil), forCellReuseIdentifier: "ArticleTableViewCell")
+        self.registerNib(UINib(nibName: "SiteTopTableViewCell", bundle: nil), forCellReuseIdentifier: "SiteTopTableViewCell")
+    
     }
     
     //必ず必要(Interface Builderで生成した場合)
@@ -90,24 +96,46 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        if section == 0{
+            return 1
+        } else {
+            return articles.count
+        }
     }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 85
+        if indexPath.section == 0 {
+            return 200
+        }
+        else {
+            return 85
+        }
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ArticleTableViewCell", forIndexPath: indexPath) as UITableViewCell
-        var article = self.articles[indexPath.row] as Article
-        var titleLabel = cell.viewWithTag(1) as UILabel
-        titleLabel.text = article.title
-        var descriptLable = cell.viewWithTag(2) as UILabel
-        descriptLable.text = article.descript
-        var dateLabel = cell.viewWithTag(3) as UILabel
-        dateLabel.text = conversionDateFormt(article.date)
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("SiteTopTableViewCell", forIndexPath: indexPath) as SiteTopTableViewCell
+            cell.siteNameLabel.text = siteName
+            cell.siteTopImageView.image = UIImage(named: siteImageName)
+            cell.imageMaskView.backgroundColor = siteColor
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("ArticleTableViewCell", forIndexPath: indexPath) as ArticleTableViewCell
+            var article = self.articles[indexPath.row] as Article
+
+            cell.title.text = article.title
+            cell.descript.text = article.descript
+            cell.date.text = conversionDateFormt(article.date)
+            return cell
+        }
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var article = articles[indexPath.row]
@@ -115,16 +143,21 @@ class ArticleTableView: UITableView, UITableViewDataSource, UITableViewDelegate,
         //ArticleViewControllerにセルがタップされたことを通知
         self.cutomDelegate?.didSelectTableViewCell(article)
     }
+
     
-    //取得した日付のフォーマットを変換
+    //取得した日付のフォーマットを変
     func conversionDateFormt(dateString:String) -> String {
+        println("ぷり")
+        println(dateString)
         let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
         let date: NSDate? = formatter.dateFromString(dateString)
         
-        let newFromatter = NSDateFormatter()
-        formatter.dateFormat = "yyy/MM/dd HH:mm"
-        var newDateString = formatter.stringFromDate(date!)
+        let newFormatter = NSDateFormatter()
+        newFormatter.dateFormat = "yyy/MM/dd HH:mm"
+        println(date)
+        var newDateString = newFormatter.stringFromDate(date!)
         return newDateString
     }
 
